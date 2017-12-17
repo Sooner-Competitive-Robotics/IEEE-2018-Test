@@ -1,0 +1,3 @@
+[submodule "RobotLibTest/RobotLib"]
+	path = RobotLibTest/RobotLib
+	url = https://github.com/Sooner-Competitive-Robotics/RobotLib.git

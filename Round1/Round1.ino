@@ -49,6 +49,7 @@ void setup() {
   Drivetrain drivetrain;
   drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, gyro, matrix, mDetector);
   
+  //Intake
   Encoder tEncoder;
   
   //Intake

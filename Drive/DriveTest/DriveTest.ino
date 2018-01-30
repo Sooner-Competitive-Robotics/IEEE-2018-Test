@@ -10,7 +10,7 @@ void setup() {
 	pinMode(10, OUTPUT);
 	pinMode(5, OUTPUT);
 	pinMode(6, OUTPUT);
-    Serial.begin(57600);//Initialize the serial port
+  Serial.begin(57600);//Initialize the serial port
 	EncoderInit();//Initialize the module
 }
 

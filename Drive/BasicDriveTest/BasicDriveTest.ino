@@ -27,11 +27,11 @@ void setup()
 
 void loop()
 {
-	basicDrive.setOutput(1, 1);
+	basicDrive.setOutput(1, 0);
 	
 	delay(2500);
 	
-	basicDrive.setOutput(0, 0);
+	basicDrive.setOutput(0, 1);
 	
 	delay(2500);
 }

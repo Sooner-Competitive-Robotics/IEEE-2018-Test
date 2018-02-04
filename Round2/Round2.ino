@@ -49,6 +49,7 @@ void setup() {
   Drivetrain drivetrain;
   drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, gyro, matrix, mDetector);
   
+  //Intake
   Encoder tEncoder;
   
   //Intake
@@ -84,7 +85,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  drivetrain.drive(47, 0);
+  drivetrain.drive(11, 0);
   drivetrain.searchForward();
 
   drivetrain.turnToAngle(90);
@@ -95,7 +96,7 @@ void loop() {
     intake.pickUpSequenceA();
     coinCount++;
   }
-  drivetrain.drive(distIntakeToMatrix, 0);          //on bottom right 6' sq
+  drivetrain.drive(distIntakeToMatrix, 0);          //on bottom right 5' sq
   drivetrain.turnToAngle(-135);               //turn onto diagonal (from top left to bottom right)
   
   while(coinCount != 3)                   //follow diagonal and pick up coins
@@ -120,12 +121,12 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }
+  }												//end on top left 4' sq
 
   drivetrain.drive(distIntakeToMatrix, 0);
-  drivetrain.turnToAngle(-135);               //turn to face down on left side 6' sq
+  drivetrain.turnToAngle(-135);               //turn to face down on left side 4' sq
 
-  while(coinCount != 8)                   //follow left side 6' sq down 
+  while(coinCount != 8)                   //follow left side 4' sq down 
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -134,7 +135,7 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }                            				 //ends on bottom left 6' corner
+  }                            				 //ends on bottom left 4' corner
   
   drivetrain.drive(distIntakeToMatrix, 0);
   drivetrain.turnToAngle(-135);               //turn to diagonal (from bottom left to top right)
@@ -148,7 +149,7 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }                            					 //ends on top right 6' corner
+  }                            					 //ends on bottom left 2' corner
   
   drivetrain.drive(34, 0);					//jump across the gray square
   
@@ -161,12 +162,12 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }                            					 //ends on top right 6' corner
+  }                            					 //ends on top right 4' corner
   
   drivetrain.drive(distIntakeToMatrix, 0);
   drivetrain.turnToAngle(135);                //turn to face down on right side 6' sq
 
-  while(coinCount != 14)                  //follow right side 6' sq down
+  while(coinCount != 14)                  //follow right side 4' sq down
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -175,11 +176,11 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }                            				 //ends on middle right 6' sq
+  }                            				 //ends on middle right 4' sq
   drivetrain.drive(distIntakeToMatrix, 0);
   drivetrain.turnToAngle(90);               //turn to face left on middle of right side 6' sq
 
-  while(coinCount != 18)                  //follow the middle line up to gray sqaure
+  while(coinCount != 16)                  //follow the middle line up to gray sqaure
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -205,7 +206,12 @@ void loop() {
 
   //drive till reach color and drive to all colors and go back to white square
 
-  drivetrain.drive(24, 0);                                 //2' is distance from last coin to center of color square, DRIVING to GREEN SQUARE
+  drivetrain.turnToAngle(180); 
+  drivetrain.drive(18, 0);  
+  intake.dropOffSequence(gray); 
+  drivetrain.turnToAngle(180);
+  
+  drivetrain.drive(42, 0);                                 //2' is distance from last coin to center of color square, DRIVING to GREEN SQUARE
   intake.dropOffSequence(green);    
 
   drivetrain.turnToAngle(90);

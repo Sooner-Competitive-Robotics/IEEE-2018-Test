@@ -84,7 +84,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  drivetrain.drive(47, 0);
+  drivetrain.drive(17, 0);                       //18" from middle of white square to edge of 4x4' square
   drivetrain.searchForward();
 
   drivetrain.turnToAngle(90);
@@ -95,7 +95,8 @@ void loop() {
     intake.pickUpSequenceA();
     coinCount++;
   }
-  drivetrain.drive(distIntakeToMatrix, 0);					//on bottom right 6' sq
+  
+  drivetrain.drive(distIntakeToMatrix, 0);					//on bottom right 4x4' sq
   drivetrain.turnToAngle(-135);								//turn onto diagonal (from top left to bottom right)
   
   while(coinCount != 2)										//follow diagonal and pick up coins
@@ -107,9 +108,9 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }															//end on top left 6' sq
+  }															//end bot right corner 2x2'
   
-  drivetrain.drive(25.5,0);
+  drivetrain.drive(25.5,0);          //drive over gray square
   drivetrain.followLineUntilCoin();
   
     while(coinCount != 4)										//follow diagonal and pick up coins
@@ -121,13 +122,13 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }	
+  }	                                          //end at top left corner 4x4'   
   
   
   drivetrain.drive(distIntakeToMatrix, 0);
-  drivetrain.turnToAngle(-135);								//turn to face down on left side 6' sq
+  drivetrain.turnToAngle(-135);								//turn to face down on left side 4x4' sq
 
-  while(coinCount != 5)										//follow left side 6' sq down 
+  while(coinCount != 5)										//follow left side 4x4' sq down 
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -136,11 +137,12 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }															//ends on middle outside
+  }															//ends on middle outside 4x4'
+  
   drivetrain.drive(distIntakeToMatrix, 0);
   drivetrain.turnToAngle(-90);								//turn to horizontal
 
-    while(coinCount != 6)										//follow horizontal and pick up coins
+  while(coinCount != 6)										//follow horizontal and pick up coins
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -151,9 +153,9 @@ void loop() {
     }  
   }	
   
-  drivetrain.drive(23,0);
+  drivetrain.drive(23,0);                //drive over gray square horizontally
   
-  while(coinCount != 8)										//follow vertical and pick up coins
+  while(coinCount != 8)										//follow horizontal and pick up coins
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -162,11 +164,11 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }	
+  }	                                            //end on opposite side of 4x4'
   
   drivetrain.turn(-90);
   
-  while(coinCount != 9)										//follow diagonal and pick up coins
+  while(coinCount != 9)										//follow vertical upwards and pick up coins
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -175,11 +177,12 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }															
+  }															            //end top right corner 4x4'
+  
   drivetrain.drive(distIntakeToMatrix, 0);
   drivetrain.turnToAngle(-135);								
 
-  while(coinCount != 10)									
+  while(coinCount != 10)									 //follow diagonal towards blue square and pick up coins
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -192,7 +195,7 @@ void loop() {
   
   drivetrain.drive(25.5,0);									//Skip Gray Square
 
-  while(coinCount != 12)									//Follow to bottom left corner
+  while(coinCount != 12)									//Follow to bottom left corner of 4x4'
   {
     drivetrain.followLineUntilCoin();
     if(intake.coinDetected())
@@ -201,7 +204,7 @@ void loop() {
       intake.pickUpSequenceA();
       coinCount++;
     }  
-  }															//ends on bottom left 
+  }															//ends on bottom left of 4x4'
 
   drivetrain.drive(25.4,0);							//drive till reach color and drive to all colors and go back to white square
 

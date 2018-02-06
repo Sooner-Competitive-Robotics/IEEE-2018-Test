@@ -35,7 +35,10 @@ void setup() {
 	Motor rightMot = Motor();
 	Encoder leftEnc = Encoder(pinLeftEnc1, pinLeftEnc2);
 	Encoder rightEnc = Encoder(pinRightEnc1, pinRightEnc2);
-	Gyro gyro = Gyro();
+	
+	//TODO: Make sure this is declared properly
+	Adafruit_BNO055 gyro;
+	
 	DigitalDevice mDetector = DigitalDevice(pinMetDet, INPUT);
 	IRMatrix matrix = IRMatrix(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
   

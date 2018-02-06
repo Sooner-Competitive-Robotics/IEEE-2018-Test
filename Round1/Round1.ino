@@ -5,9 +5,9 @@
 #define pinLeftMot2 
 #define pinRightMot1
 #define pinRightMot2
-#define pinColor1 //should have same pin on i2c chain
+#define pinColor1 		//should have same pin on i2c chain
 #define pinColor2
-#define pinGyro1 //should have same pin on i2c chain
+#define pinGyro1 		//should have same pin on i2c chain
 #define pinGyro2
 #define pinLeftEnc1
 #define pinLeftEnc2
@@ -15,8 +15,8 @@
 #define pinRightEnc2
 #define pinIntakeEnc1
 #define pinIntakeEnc2
-#define pinMetDet //make sure it's giving an output
-#define pinElecMag //make sure it's giving an output
+#define pinMetDet 		//make sure it's giving an output
+#define pinElecMag 		//make sure it's giving an output
 #define pinLimSwitch 
 #define pinIRMatrix1
 #define pinIRMatrix2
@@ -24,6 +24,9 @@
 #define pinIRMatrix4
 #define pinIRMatrix5
 #define colorServoPin 
+
+#define distMetalDetectToIntake;		//Make these #define's
+#define distIntakeToIRMatrix;
 
 void setup() {
 	// put your setup code here, to run once:
@@ -78,9 +81,8 @@ void setup() {
 	Color gray("gray");
   
 	int coinCount = 0;
-	int distMetalDetectToIntake;
-	int distIntakeToIRMatrix;
-	//Color colorOfSquare;
+	//int distMetalDetectToIntake;		//Make these #define's
+	//int distIntakeToIRMatrix;
   
 	//Encoder Interrupts
 	attachInterrupt(0, encLeftInterrupt, CHANGE);

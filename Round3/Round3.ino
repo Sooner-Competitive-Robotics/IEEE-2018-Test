@@ -25,6 +25,9 @@
 #define pinIRMatrix5
 #define colorServoPin 
 
+#define distMetalDetectToIntake;		//Make these #define's
+#define distIntakeToIRMatrix;
+
 void setup() {
 	// put your setup code here, to run once:
 	//Drivetrain
@@ -78,10 +81,9 @@ void setup() {
 	Color gray("gray");
   
 	int coinCount = 0;
-	int distMetalDetectToIntake;
-	int distIntakeToIRMatrix;
-	//Color colorOfSquare;
-  
+	//int distMetalDetectToIntake;		//Make these #define's
+	//int distIntakeToIRMatrix;
+	
 	//Encoder Interrupts
 	attachInterrupt(0, encLeftInterrupt, CHANGE);
 	attachInterrupt(0, encRightInterrupt, CHANGE);

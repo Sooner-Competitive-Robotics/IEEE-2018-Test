@@ -25,6 +25,9 @@
 #define pinIRMatrix5
 #define colorServoPin 
 
+#define distMetalDetectToIntake;		//Make these #define's
+#define distIntakeToIRMatrix;
+
 void setup() {
   // put your setup code here, to run once:
   //Drivetrain
@@ -76,10 +79,17 @@ void setup() {
   Color yellow("yellow");
   Color gray("gray");
   
-  int coinCount = 0;
-  int distMetalDetectToIntake;
-  int distIntakeToIRMatrix;
-  Color colorOfSquare;
+	int coinCount = 0;
+	//int distMetalDetectToIntake;		//Make these #define's
+	//int distIntakeToIRMatrix;
+  
+	//Encoder Interrupts
+	attachInterrupt(0, encLeftInterrupt, CHANGE);
+	attachInterrupt(0, encRightInterrupt, CHANGE);
+	
+	//Encoder Constants.........Need testing to change
+	leftEnc.setConstant(1);
+	rightEnc.setConstant(1);
 }
 
 void loop() {
@@ -231,4 +241,14 @@ void loop() {
   drivetrain.turnToAngle(-90);
   drivetrain.drive(42, 0);                        //3.5' is distance between centers of color squares, RETURN to WHITE SQUARE
   
+}
+
+void encLeftInterrupt() 
+{
+	leftEnc.process(); 
+}
+  
+void encRightInterrupt() 
+{  
+	rightEnc.process(); 
 }

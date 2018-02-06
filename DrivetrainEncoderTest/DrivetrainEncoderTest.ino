@@ -1,64 +1,72 @@
 #include <RobotLib.h>
 #include <IEEErobot2018.h>
 
-#define pinLeftMot1 
-#define pinLeftMot2 
-#define pinRightMot1
-#define pinRightMot2
-#define pinGyro1 //should have same pin on i2c chain
-#define pinGyro2
-#define pinLeftEnc1
-#define pinLeftEnc2
-#define pinRightEnc1
-#define pinRightEnc2
-#define pinIRMatrix1
-#define pinIRMatrix2
-#define pinIRMatrix3
-#define pinIRMatrix4
-#define pinIRMatrix5 
+#define pinLeftMot1 24
+#define pinLeftMot2 25
+#define pinLeftMotEnb 10
+#define pinRightMot1 26
+#define pinRightMot2 23
+#define pinRightMotEnb 11
+#define pinColor1 0		//should have same pin on i2c chain
+#define pinColor2 0
+#define pinGyro1 0	 	//should have same pin on i2c chain
+#define pinGyro2 0
+#define pinLeftEnc1 1
+#define pinLeftEnc2 2
+#define pinRightEnc1 3
+#define pinRightEnc2 4
+#define pinIntakeEnc1 0
+#define pinIntakeEnc2 0
+#define pinMetDet 0 //make sure it's giving an output
+#define pinElecMag 0 //make sure it's giving an output
+#define pinLimSwitch 0
+#define pinIRMatrix1 0
+#define pinIRMatrix2 0
+#define pinIRMatrix3 0
+#define pinIRMatrix4 0
+#define pinIRMatrix5 0
+#define colorServoPin 0
+
+Drivetrain drivetrain;
 
 void setup() {
 	//Drivetrain
-	Motor leftMot = new Motor();
-	Motor rightMot = new Motor();
-	Encoder leftEnc = new Encoder();
-	Encoder rightEnc = new Encoder();
-	Gyro gyro = new Gyro();
-	DigitalDevice mDetector = new DigitalDevice();
-	IRMatrix matrix = new IRMatrix(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
+	Motor leftMot = Motor();
+	Motor rightMot = Motor();
+	Encoder leftEnc = Encoder(pinLeftEnc1, pinLeftEnc2);
+	Encoder rightEnc = Encoder(pinRightEnc1, pinRightEnc2);
+	Gyro gyro = Gyro();
+	DigitalDevice mDetector = DigitalDevice(pinMetDet, INPUT);
+	IRMatrix matrix = IRMatrix(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
   
 	//Drivetrain
-	leftMot.begin(pinLeftMot1, pinLeftMot2, 1);
-	rightMot.begin(pinRightMot1, pinRightMot2, 1);
-	leftEnc.begin(pinLeftEnc1, pinLeftEnc2, 1);
-	rightEnc.begin(pinRightEnc1, pinRightEnc2 1);
-	gyro.begin(pinGyro1, pinGyro2);                                                              //make sure gyro is correct
-	mDetector.initialize(pinMetDet);
+	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
+	rightMot.begin(pinRightMot1, pinRightMot2, pinRightMotEnb);
 	matrix.begin(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
   
 	//Drivetrain
-	Drivetrain drivetrain;
 	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, gyro, matrix, mDetector);
   
 	attachInterrupt(0, encLeftInterrupt, CHANGE);
 	attachInterrupt(0, encRightInterrupt, CHANGE);
 	
-	leftEnc.setConstant(1);
-	rightEnc.setConstant(1);
+	Serial.begin(9600);
 }
   
 void loop() 
 {	  
-	drivetrain.drive(5000, 0);	  
+	//drivetrain.drive(5000, 0);	 
+	Serial.print("Left: " + drivetrain.getLeftEncoder().getTicks());
+	Serial.print("Right: " + drivetrain.getRightEncoder().getTicks());
 }
   
 void encLeftInterrupt() 
 {
-	leftEnc.process(); 
+	drivetrain.getLeftEncoder().process(); 
 }
   
 void encRightInterrupt() 
 {  
-	rightEnc.process(); 
+	drivetrain.getRightEncoder().process(); 
 }
 

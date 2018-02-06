@@ -1,18 +1,20 @@
 #include <RobotLib.h>
 #include <IEEErobot2018.h>
 
-#define pinLeftMot1 
-#define pinLeftMot2 
-#define pinRightMot1
-#define pinRightMot2
-#define pinColor1 //should have same pin on i2c chain
+#define pinLeftMot1 24
+#define pinLeftMot2 25
+#define pinLeftMotEnb 10
+#define pinRightMot1 26
+#define pinRightMot2 23
+#define pinRightMotEnb 11
+#define pinColor1 		//should have same pin on i2c chain
 #define pinColor2
-#define pinGyro1 //should have same pin on i2c chain
+#define pinGyro1 		//should have same pin on i2c chain
 #define pinGyro2
-#define pinLeftEnc1
-#define pinLeftEnc2
-#define pinRightEnc1
-#define pinRightEnc2
+#define pinLeftEnc1 1
+#define pinLeftEnc2 2
+#define pinRightEnc1 3
+#define pinRightEnc2 4
 #define pinIntakeEnc1
 #define pinIntakeEnc2
 #define pinMetDet //make sure it's giving an output

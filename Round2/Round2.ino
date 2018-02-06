@@ -216,12 +216,14 @@ void loop() {
 
 	//drive till reach color and drive to all colors and go back to white square
 
+	/*
 	drivetrain.turnToAngle(180); 
 	drivetrain.drive(18, 0);  
 	intake.dropOffSequence(gray); 
 	drivetrain.turnToAngle(180);
+	*/
   
-	drivetrain.drive(42, 0);                                 //2' is distance from last coin to center of color square, DRIVING to GREEN SQUARE
+	drivetrain.drive(24, 0);                                 //2' is distance from last coin to center of color square, DRIVING to GREEN SQUARE
 	intake.dropOffSequence(green);    
 
 	drivetrain.turnToAngle(90);

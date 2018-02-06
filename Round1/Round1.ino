@@ -218,12 +218,14 @@ void loop() {
 
 	//drive till reach color and drive to all colors and go back to white square
   
+	/*
 	drivetrain.turnToAngle(180); 
 	drivetrain.drive(12, 0);  
 	intake.dropOffSequence(gray); 
 	drivetrain.turnToAngle(180);
+	*/
 
-	drivetrain.drive(42, 0);                                 //3.5' is distance from gray sq of color square, DRIVING to GREEN SQUARE
+	drivetrain.drive(30, 0);                                 //3.5' is distance from gray sq of color square, DRIVING to GREEN SQUARE
 	intake.dropOffSequence(green);    
 
 	drivetrain.turnToAngle(90);

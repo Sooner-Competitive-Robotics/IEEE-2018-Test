@@ -47,8 +47,10 @@ void setup() {
   
 void loop() 
 {	 
-	Serial.print("Left: " + drivetrain.getLeftEncoder().getTicks());
-	Serial.println("\tRight: " + drivetrain.getRightEncoder().getTicks());
+	Serial.print("Left: ");
+	Serial.print(drivetrain.getLeftEncoder().getTicks());
+	Serial.print("\tRight: ");
+	Serial.println(drivetrain.getRightEncoder().getTicks());
 }
 
 void encLeftInterrupt() 

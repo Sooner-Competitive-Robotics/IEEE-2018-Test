@@ -16,6 +16,8 @@ void setup() {
 	Encoder rightEnc(pinRightEnc1, pinRightEnc2);
 	DigitalDevice mDetector(pinMetDet, INPUT);
 	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
+  leftEnc.reset();
+  rightEnc.reset();
 
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
@@ -38,8 +40,8 @@ void setup() {
 	Serial.print(" -Intake Has Begun- \n");
 	
 	//--Interrupts
-	attachInterrupt(2, encLeftInterrupt, CHANGE);
-	attachInterrupt(3, encRightInterrupt, CHANGE);
+	attachInterrupt(0, encLeftInterrupt, CHANGE);
+	attachInterrupt(1, encRightInterrupt, CHANGE);
 	
 	//Interrupt for Turntable Encoder needed + method
 	Serial.print(" -Interrupts- \n");

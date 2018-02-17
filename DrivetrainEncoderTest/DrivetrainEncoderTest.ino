@@ -32,16 +32,16 @@ void setup() {
 	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
 	
 	//--Gyro declaration
-	Adafruit_BNO055 gyro;
+	//Adafruit_BNO055 gyro;
   
 	//--ColorSensor declaration
-	Adafruit_TCS34725 colorSensor(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+	//Adafruit_TCS34725 colorSensor(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
   
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
 	rightMot.begin(pinRightMot1, pinRightMot2, pinRightMotEnb);
 	//mat.begin(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
-	//drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, gyro, mat, mDetector);				//ERROR HERE in Matrix reference inside begin
+	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, mat, mDetector);				//ERROR HERE in Matrix reference inside begin
 	
 	Serial.print(" -Drive Has Begun- ");
 	

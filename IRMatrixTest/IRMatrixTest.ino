@@ -16,8 +16,6 @@ void setup() {
 	Encoder rightEnc(pinRightEnc1, pinRightEnc2);
 	DigitalDevice mDetector(pinMetDet, INPUT);
 	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
-  leftEnc.reset();
-  rightEnc.reset();
 
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
@@ -49,12 +47,9 @@ void setup() {
   
 void loop() 
 {	 
-	Serial.print("Left: ");
-	Serial.print(drivetrain.getLeftEncoder().getTicks());
-	Serial.print("\tRight: ");
-	Serial.println(drivetrain.getRightEncoder().getTicks());
+	Serial.print("Value: ");
+	Serial.println(drivetrain.getIRMatrixValue());
 }
-
 void encLeftInterrupt() 
 {
 	drivetrain.getLeftEncoder().process(); 

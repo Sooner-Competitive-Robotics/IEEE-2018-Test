@@ -26,12 +26,16 @@ Encoder rightEnc(pinRightEnc1,pinRightEnc2);
 IRMatrix matrix(pinMatrix0,pinMatrix1,pinMatrix2,pinMatrix3,pinMatrix4);
 
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Start Serial");
 	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, matrix, mDetector_empty);
 	leftMot.begin(pinLeftMot1,pinLeftMot2,pinLeftMotEnb);
 	rightMot.begin(pinRightMot1,pinRightMot2,pinRightMotEnb);
 	matrix.begin(pinMatrix0,pinMatrix1,pinMatrix2,pinMatrix3,pinMatrix4);
+  Serial.println("End Setup");
 }
 
 void loop() {
+  Serial.println("Following Line");
 	drivetrain.followLine();
 }

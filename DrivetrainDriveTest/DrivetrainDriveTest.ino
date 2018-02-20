@@ -17,9 +17,9 @@ void setup() {
 	DigitalDevice mDetector(pinMetDet, INPUT);
 	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
 	//leftEnc.reset();
-	leftEnc.setConstant(leftEncConstant);
+	leftEnc.setConstant(rightEncoderConstant);
 	//rightEnc.reset();
-	rightEnc.setConstant(rightEncConstant);
+	rightEnc.setConstant(rightEncoderConstant);
 
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
@@ -38,6 +38,7 @@ void setup() {
 	//--Intake
 	iMotor.begin(pinIbtakeMot1, pinIbtakeMot2, pinIbtakeMotEnb);
 	eMagnet.initialize(pinElecMag);
+	intake.begin(iMotor, tEncoder, mDetector, lSwitch, eMagnet, turntable, colorServoPinNumber);
   
 	Serial.print(" -Intake Has Begun- \n");
 	
@@ -51,7 +52,14 @@ void setup() {
 
 void loop()
 {
-	drivetrain.drive(2, 0, 0, true);
+	Serial.print("10");
+	/*
+	drivetrain.drive(.5, 0, yaw, true);	//Just to drive
+	
+	delay (1000);
+	
+	drivetrain.followLine();
+	*/
 }
 
 void encLeftInterrupt() 

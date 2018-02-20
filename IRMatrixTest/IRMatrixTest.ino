@@ -47,8 +47,10 @@ void setup() {
   
 void loop() 
 {	 
-	Serial.print("Value: ");
-	Serial.println(drivetrain.getIRMatrixValue());
+	//Serial.print("Value: ");
+	//Serial.println(drivetrain.getIRMatrixValue());
+	
+	drivetrain.printIRMatrix();
 }
 void encLeftInterrupt() 
 {

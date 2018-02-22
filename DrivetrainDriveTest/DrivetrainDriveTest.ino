@@ -4,10 +4,31 @@
 Drivetrain drivetrain;
 Intake intake;						
 
+//Drive Status Flag
+bool driveComplete = false;
+bool resetDrive = true;
+
+float distances[10] = {12, 0, 24, 0, 12, 0, 24, 0, 24, 0};
+float angles[10] = {0, -90, -90, 0, 0, 90, 90, 180, 180, 0};
+int index = 0;
+
 void setup() {
 	
 	Serial.begin(9600);
 	Serial.print(" -Has Begun- \n");
+	
+	Collection<float> turnK(3);
+	Collection<float> distanceK(3);
+	
+	//Add Turn Constants
+	turnK.add(TURN_KP);
+	turnK.add(TURN_KI);
+	turnK.add(TURN_KD);
+	
+	//Add Distance Constants
+	distanceK.add(DIST_KP);
+	distanceK.add(DIST_KI);
+	distanceK.add(DIST_KD);
 	
 	//--Drivetrain
 	Motor leftMot;
@@ -16,15 +37,19 @@ void setup() {
 	Encoder rightEnc(pinRightEnc1, pinRightEnc2);
 	DigitalDevice mDetector(pinMetDet, INPUT);
 	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
-	//leftEnc.reset();
+
+	//Set the encoder constants
 	leftEnc.setConstant(rightEncoderConstant);
-	//rightEnc.reset();
 	rightEnc.setConstant(rightEncoderConstant);
 
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);
 	rightMot.begin(pinRightMot1, pinRightMot2, pinRightMotEnb);
-	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, mat, mDetector); //ERROR HERE in Matrix reference inside begin
+	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, mat, mDetector);
+	
+	//Setup PID
+	drivetrain.initializeTurnPID(turnK);
+	drivetrain.initializeDistancePID(distanceK);
 	
 	Serial.print(" -Drive Has Begun- \n");
 	
@@ -38,7 +63,7 @@ void setup() {
 	//--Intake
 	iMotor.begin(pinIbtakeMot1, pinIbtakeMot2, pinIbtakeMotEnb);
 	eMagnet.initialize(pinElecMag);
-	intake.begin(iMotor, tEncoder, mDetector, lSwitch, eMagnet, turntable, colorServoPinNumber);
+	intake.begin(iMotor, tEncoder, mDetector, lSwitch, eMagnet, turntable, colorServoPin);
   
 	Serial.print(" -Intake Has Begun- \n");
 	
@@ -52,14 +77,24 @@ void setup() {
 
 void loop()
 {
-	Serial.print("10");
-	/*
-	drivetrain.drive(.5, 0, yaw, true);	//Just to drive
-	
-	delay (1000);
-	
-	drivetrain.followLine();
-	*/
+	if(!driveComplete)
+	{
+		//Drive 12 inches straight
+		driveComplete = drivetrain.drive(distances[index], angles[index], yaw, resetDrive);
+		resetDrive= false;
+	}
+	else
+	{
+		//Reset flags
+		resetDrive = true;
+		driveComplete = false;
+		
+		//Onto the next instruction
+		index = (index == 9) ? 0 : index + 1;
+		
+		//Wait a second to assess performance
+		delay(1000);
+	}
 }
 
 void encLeftInterrupt() 

@@ -92,9 +92,14 @@ void loop()
 {	
 	if(!driveComplete)
 	{
-		//updateGyro();
+		updateGyro();
+		
 		Serial.print(" \tYaw: ");
 		Serial.print(yaw);
+		Serial.print(" \tPitch: ");
+		Serial.print(pitch);
+		Serial.print(" \tRoll: ");
+		Serial.print(roll);
 		
 		left = drivetrain.getLeftEncoder().getValue();
 		right = drivetrain.getRightEncoder().getValue();

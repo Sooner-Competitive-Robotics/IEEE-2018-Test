@@ -60,6 +60,7 @@ void loop()
 		resetDrive = true;
 		driveComplete = false;
 		
+		drivetrain.setOutput(0, 0);
 		//Onto the next instruction
 		//index = (index == 9) ? 0 : index + 1;
 		

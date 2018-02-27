@@ -61,7 +61,7 @@ void loop()
 		driveComplete = false;
 		
 		//Onto the next instruction
-		index = (index == 9) ? 0 : index + 1;
+		//index = (index == 9) ? 0 : index + 1;
 		
 		//Wait a second to assess performance
 		delay(1000);

@@ -31,13 +31,3 @@ void loop()
 	Serial.println("Following Line");
 	drivetrain.followLine();
 }
-
-void encLeftInterrupt() 
-{
-	drivetrain.getLeftEncoder().process(); 
-}
-  
-void encRightInterrupt() 
-{  
-	drivetrain.getRightEncoder().process(); 
-}

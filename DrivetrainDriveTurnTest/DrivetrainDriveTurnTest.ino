@@ -37,10 +37,10 @@ void loop()
 		right = drivetrain.getRightEncoder().getValue();
 		dist = (right + left) / 2;
 		
-		Serial.print("\tL: ");
-		Serial.print(left);
-		Serial.print("\tR:");
-		Serial.print(right);
+		//Serial.print("\tL: ");
+		//Serial.print(left);
+		//Serial.print("\tR:");
+		//Serial.print(right);
 		Serial.print("\tDIST: ");
 		Serial.print(dist);
 		

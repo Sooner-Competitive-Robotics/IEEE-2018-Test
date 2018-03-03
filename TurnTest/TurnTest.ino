@@ -2,7 +2,7 @@
 #include <IEEErobot2018.h>
 
 //Drive Status Flag
-bool driveComplete = false;
+bool turnComplete = false;
 bool resetDrive = true;
 
 int index = 0;
@@ -19,7 +19,7 @@ void setup()
 
 void loop()
 {	
-	if(!driveComplete)
+	if(!turnComplete)
 	{		
 		updateGyro();
 		
@@ -30,28 +30,32 @@ void loop()
 		Serial.print(" \tRoll: ");
 		Serial.print(roll);
 		
+		
 		left = drivetrain.getLeftEncoder().getValue();
 		right = drivetrain.getRightEncoder().getValue();
 		dist = (right + left) / 2;
 		
+		/*
 		Serial.print("\tL: ");
 		Serial.print(left);
 		Serial.print("\tR:");
 		Serial.print(right);
 		Serial.print("\tDIST: ");
 		Serial.print(dist);
+		*/
 		
-		//Drive 12 inches straight
-		driveComplete = drivetrain.drive(0, angleInput, yaw, resetDrive);
+		//Turn to angle straight
+		turnComplete = drivetrain.drive(0, angleInput, yaw, resetDrive);
 		resetDrive= false;
 		
 		Serial.print("\tStatus: ");
-		Serial.print(driveComplete);
+		Serial.print(turnComplete);
 		
 		Serial.print("\n");
 	}
 	else
 	{
+		/*
 		if(Serial.available() > 0)
 		{
 			//Get new angle
@@ -60,9 +64,12 @@ void loop()
 			//Reset flags
 			resetDrive = true;
 			driveComplete = false;
-		}
+		}*/
+		
+		resetDrive = true;
+		turnComplete = false;
 		
 		//Wait a second to assess performance
-		delay(1000);
+		//delay(10000);
 	}
 }

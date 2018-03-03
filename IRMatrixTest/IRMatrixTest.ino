@@ -15,7 +15,7 @@ void setup() {
 	Encoder leftEnc(pinLeftEnc1, pinLeftEnc2);
 	Encoder rightEnc(pinRightEnc1, pinRightEnc2);
 	DigitalDevice mDetector(pinMetDet, INPUT);
-	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
+	IRMatrix mat(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5, pinIRMatrix6);
 
 	//--Drivetrain
 	leftMot.begin(pinLeftMot1, pinLeftMot2, pinLeftMotEnb);

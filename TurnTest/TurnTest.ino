@@ -5,13 +5,12 @@
 bool driveComplete = false;
 bool resetDrive = true;
 
-float distances[10] = {12, 0, 24, 0, 12, 0, 24, 0, 24, 0};
-float angles[10] = {0, -90, -90, 0, 0, 90, 90, 180, 180, 0};
 int index = 0;
 
 //Debug vars
 float left, right, dist;
 
+int angleInput = 0;
 
 void setup() 
 {	
@@ -21,13 +20,10 @@ void setup()
 void loop()
 {	
 	if(!driveComplete)
-	{
-		Serial.print("Drive Command ID: ");
-		Serial.print(index);
-		
+	{		
 		updateGyro();
 		
-		Serial.print(" \tYaw: ");
+		Serial.print(" Yaw: ");
 		Serial.print(yaw);
 		Serial.print(" \tPitch: ");
 		Serial.print(pitch);
@@ -46,7 +42,7 @@ void loop()
 		Serial.print(dist);
 		
 		//Drive 12 inches straight
-		driveComplete = drivetrain.drive(distances[index], angles[index], yaw, resetDrive);
+		driveComplete = drivetrain.drive(0, angleInput, yaw, resetDrive);
 		resetDrive= false;
 		
 		Serial.print("\tStatus: ");
@@ -56,12 +52,15 @@ void loop()
 	}
 	else
 	{
-		//Reset flags
-		resetDrive = true;
-		driveComplete = false;
-		
-		//Onto the next instruction
-		//index = (index == 9) ? 0 : index + 1;
+		if(Serial.available() > 0)
+		{
+			//Get new angle
+			angleInput = Serial.read();
+			
+			//Reset flags
+			resetDrive = true;
+			driveComplete = false;
+		}
 		
 		//Wait a second to assess performance
 		delay(1000);

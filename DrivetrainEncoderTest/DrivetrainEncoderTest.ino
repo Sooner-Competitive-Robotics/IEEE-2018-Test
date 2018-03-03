@@ -1,17 +1,5 @@
 #include <RobotLib.h>
-#include <IEEErobot2018.h>
-
-//Colors
-Color blue("blue");
-Color green("green");
-Color red("red");	
-Color cyan("cyan");
-Color magenta("magenta");
-Color yellow("yellow");
-Color gray("gray");
-
-Drivetrain drivetrain;
-Intake intake;						
+#include <IEEErobot2018.h>					
 
 void setup() {	
 	robotSetup();

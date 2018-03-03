@@ -1,97 +1,20 @@
 #include <RobotLib.h>
 #include <IEEErobot2018.h>
 
-#define pinLeftMot1 24
-#define pinLeftMot2 25
-#define pinLeftMotEnb 10
-#define pinRightMot1 26
-#define pinRightMot2 23
-#define pinRightMotEnb 11
-#define pinColor1 		//should have same pin on i2c chain
-#define pinColor2
-#define pinGyro1 		//should have same pin on i2c chain
-#define pinGyro2
-#define pinLeftEnc1 1
-#define pinLeftEnc2 2
-#define pinRightEnc1 3
-#define pinRightEnc2 4
-#define pinIntakeEnc1
-#define pinIntakeEnc2
-#define pinMetDet //make sure it's giving an output
-#define pinElecMag //make sure it's giving an output
-#define pinLimSwitch 
-#define pinIRMatrix1
-#define pinIRMatrix2
-#define pinIRMatrix3
-#define pinIRMatrix4
-#define pinIRMatrix5
-#define colorServoPin 
+//Drive Status Flag
+bool driveComplete = false;
+bool resetDrive = true;
 
-#define distMetalDetectToIntake;		//Make these #define's
-#define distIntakeToIRMatrix;
+float distances[10] = {12, 0, 24, 0, 12, 0, 24, 0, 24, 0};
+float angles[10] = {0, -90, -90, 0, 0, 90, 90, 180, 180, 0};
+int index = 0;
 
-void setup() {
-	// put your setup code here, to run once:
-	//Drivetrain
-	Motor leftMot = new Motor();
-	Motor rightMot = new Motor();
-	Encoder leftEnc = new Encoder();
-	Encoder rightEnc = new Encoder();
-	Gyro gyro = new Gyro();
-	DigitalDevice mDetector = new DigitalDevice();
-	IRMatrix matrix = new IRMatrix(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
-  
-	//Drivetrain
-	leftMot.begin(pinLeftMot1, pinLeftMot2, 1);
-	rightMot.begin(pinRightMot1, pinRightMot2, 1);
-	leftEnc.begin(pinLeftEnc1, pinLeftEnc2, 1);
-	rightEnc.begin(pinRightEnc1, pinRightEnc2 1);
-	gyro.begin(pinGyro1, pinGyro2);                                                              //make sure gyro is correct
-	mDetector.initialize(pinMetDet);
-	matrix.begin(pinIRMatrix1, pinIRMatrix2, pinIRMatrix3, pinIRMatrix4, pinIRMatrix5);
-  
-	//Drivetrain
-	Drivetrain drivetrain;
-	drivetrain.begin(leftMot, rightMot, leftEnc, rightEnc, gyro, matrix, mDetector);
-  
-	Encoder tEncoder;
-  
-	//Intake
-	DigitalDevice lSwitch;
-	Electromagnet eMagnet;
-	Servo tServo;                                    //remember to instantiate winch servo
-	Turntable turntable;
-	ColorSensor colorSensor;
+//Debug vars
+float left, right, dist;
 
-	tEncoder.begin(pinIntakeEncoder1, pinIntakeEncoder2);
-	eMagnet.initialize(pinElecMag); 
-
-	lSwitch.initialize(pinLimSwitch);
-	turntable.begin(tServo);
-  
-	//Intake
-	Intake intake = new Intake(tEncoder, mDetector, lSwitch, eMagnet, turntable, colorSensor, colorServoPin);
-
-	//Colors
-	Color blue("blue");
-	Color green("green");
-	Color red("red");
-	Color cyan("cyan");
-	Color magenta("magenta");
-	Color yellow("yellow");
-	Color gray("gray");
-  
-	int coinCount = 0;
-	//int distMetalDetectToIntake;		//Make these #define's
-	//int distIntakeToIRMatrix;
-  
-	//Encoder Interrupts
-	attachInterrupt(0, encLeftInterrupt, CHANGE);
-	attachInterrupt(0, encRightInterrupt, CHANGE);
-	
-	//Encoder Constants.........Need testing to change
-	leftEnc.setConstant(1);
-	rightEnc.setConstant(1);
+void setup() 
+{	
+	robotSetup();
 }
 
 void loop() {

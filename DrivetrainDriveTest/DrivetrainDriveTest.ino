@@ -12,7 +12,6 @@ int index = 0;
 //Debug vars
 float left, right, dist;
 
-
 void setup() 
 {	
 	robotSetup();

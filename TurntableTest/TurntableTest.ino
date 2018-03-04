@@ -2,47 +2,58 @@
 #include <IEEErobot2018.h>
 #define pin 5
 
-Turntable turnTable;
-
 void setup() 
 {  
 	robotSetup();
-	turnTable = intake.getTurnTable();
 }
 
 void loop() 
 {
 	//Check idle position
-	turnTable.setPosition(); // IDLE_ANGLE
+	Serial.println("IDLE check");
+	intake.turnTable.setPosition(); // IDLE_ANGLE
 	delay(1000);
 	
 	//Check basic degrees
-	turnTable.setPosition(0);
+	Serial.println("0 check");
+	intake.turnTable.setPosition(0);
 	delay(1000);
-	turnTable.setPosition(90);
+	Serial.println("90 check");
+	intake.turnTable.setPosition(90);
 	delay(1000);
-	turnTable.setPosition(180);
+	Serial.println("180 check");
+	intake.turnTable.setPosition(180);
 	delay(1000);
-	turnTable.setPosition(0);
+	Serial.println("0 check");
+	intake.turnTable.setPosition(0);
 	delay(1000);
-	turnTable.setPosition(-90); //Servo might not be able to go this far I wasn't sure
+	Serial.println("-90 check");
+	intake.turnTable.setPosition(-90); //Servo might not be able to go this far I wasn't sure
 	delay(1000);
-	turnTable.setPosition(-180); //Servo might not be able to go this far I wasn't sure
+	Serial.println("-180 check");
+	intake.turnTable.setPosition(-180); //Servo might not be able to go this far I wasn't sure
 	delay(1000);
 	
 	//Check colors
-	turnTable.setPosition(blue);
+	Serial.println("BLUE check");
+	intake.turnTable.setPosition(blue);
 	delay(1000);
-	turnTable.setPosition(green);
+	Serial.println("GREEN check");
+	intake.turnTable.setPosition(green);
 	delay(1000);
-	turnTable.setPosition(red);
+	Serial.println("RED check");
+	intake.turnTable.setPosition(red);
 	delay(1000);
-	turnTable.setPosition(cyan);
+	Serial.println("CYAN check");
+	intake.turnTable.setPosition(cyan);
 	delay(1000);
-	turnTable.setPosition(magenta);
+	Serial.println("MAGENTA check");
+	intake.turnTable.setPosition(magenta);
 	delay(1000);
-	turnTable.setPosition(yellow);
+	Serial.println("YELLOW check");
+	intake.turnTable.setPosition(yellow);
 	delay(1000);
-	turnTable.setPosition(gray);
+	Serial.println("GRAY check");
+	intake.turnTable.setPosition(gray);
 	delay(1000);
 }

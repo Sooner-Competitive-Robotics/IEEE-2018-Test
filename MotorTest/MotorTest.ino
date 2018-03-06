@@ -1,4 +1,5 @@
 #include <RobotLib.h>
+#include <IEEErobot2018.h>	
 
 #define PIN_A 22
 #define PIN_B 23
@@ -7,17 +8,26 @@
 Motor motor;
 float out = 0.0;
 int userInput = 0;
+Encoder encoder(20,21);
 
 void setup()
 {
+	//robotSetup();
+	
 	//Start the Serial
 	Serial.begin(9600);
 	
 	//Setup the motor
 	motor.begin(PIN_A, PIN_B, PIN_EN);
 	
+	encoder.setConstant(intakeEncoderConstant);
+
+	attachInterrupt(3,interrupt,CHANGE);
+	
 	//Prompt user
 	Serial.println("Enter an integer value for % speed (-100 to 100):");
+	
+	
 }
 
 void loop()
@@ -36,7 +46,8 @@ void loop()
 		out = userInput / 100.;
 		
 		//Set the motor's output
-		motor.output(out);
+		motor.output(out);	
+		//intake.raiseRackAndPinion().output(out);
 		
 		//Indicate output
 		Serial.print("Output: ");
@@ -45,7 +56,19 @@ void loop()
 		
 		//Prompt user again
 		Serial.println("Enter an integer value for % speed (-100 to 100):");
+		
+		Serial.print("\tTicks: ");
+		Serial.print(encoder.getTicks());
+		//Serial.print(intake.getRackAndPinionEncoder().getTicks());
+	
+		Serial.print("\tValue: ");
+		Serial.print(encoder.getValue());
+		//Serial.println(intake.getRackAndPinionEncoder().getValue());
 	}
 	
 	delay(20);
+}
+
+void interrupt(){
+encoder.process();
 }

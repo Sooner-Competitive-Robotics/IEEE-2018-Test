@@ -10,7 +10,7 @@ int index = 0;
 //Debug vars
 float left, right, dist;
 
-int angleInput = 0;
+int angleInput = 90;
 
 void setup() 
 {	
@@ -63,13 +63,13 @@ void loop()
 			
 			//Reset flags
 			resetDrive = true;
-			driveComplete = false;
+			turnComplete = false;
 		}*/
 		
 		resetDrive = true;
 		turnComplete = false;
 		
 		//Wait a second to assess performance
-		//delay(10000);
+		delay(10000);
 	}
 }

@@ -10,7 +10,7 @@ int index = 0;
 //Debug vars
 float left, right, dist;
 
-int angleInput = 90;
+int angleInput = 0;
 
 void setup() 
 {	

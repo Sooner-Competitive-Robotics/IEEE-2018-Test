@@ -11,13 +11,13 @@ int userInput = 0;
 
 void setup()
 {
-	//robotSetup();
+	robotSetup();
 	
 	//Start the Serial
-	Serial.begin(9600);
+	//Serial.begin(9600);
 	
 	//Setup the motor
-	motor.begin(PIN_A, PIN_B, PIN_EN);
+	//motor.begin(PIN_A, PIN_B, PIN_EN);
 	
 	//Prompt user
 	Serial.println("Enter an integer value for % speed (-100 to 100):");
@@ -41,8 +41,8 @@ void loop()
 		out = userInput / 100.;
 		
 		//Set the motor's output
-		motor.output(out);	
-		//intake.raiseRackAndPinion().output(out);
+		//motor.output(out);	
+		intake.raiseRackAndPinion().output(out);
 		
 		//Indicate output
 		Serial.print("Output: ");
@@ -53,10 +53,10 @@ void loop()
 		Serial.println("Enter an integer value for % speed (-100 to 100):");
 		
 		Serial.print("\tTicks: ");
-		//Serial.print(intake.getRackAndPinionEncoder().getTicks());
+		Serial.print(intake.getRackAndPinionEncoder().getTicks());
 	
 		Serial.print("\tValue: ");
-		//Serial.println(intake.getRackAndPinionEncoder().getValue());
+		Serial.println(intake.getRackAndPinionEncoder().getValue());
 	}
 	
 	delay(20);

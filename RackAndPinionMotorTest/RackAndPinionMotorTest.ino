@@ -5,24 +5,15 @@
 #define PIN_B 23
 #define PIN_EN 13
 
-Motor motor;
 float out = 0.0;
 int userInput = 0;
-Encoder encoder(20,21);
 
 void setup()
 {
-	//robotSetup();
+	robotSetup();
 	
 	//Start the Serial
-	Serial.begin(9600);
-	
-	//Setup the motor
-	motor.begin(PIN_A, PIN_B, PIN_EN);
-	
-	encoder.setConstant(intakeEncoderConstant);
-
-	attachInterrupt(3,interrupt,CHANGE);
+	//Serial.begin(9600);
 	
 	//Prompt user
 	Serial.println("Enter an integer value for % speed (-100 to 100):");
@@ -44,28 +35,22 @@ void loop()
 		out = userInput / 100.;
 		
 		//Set the motor's output
-		motor.output(out);
+		intake.getRackAndPinionMotor().output(out);	
 		
 		//Indicate output
 		Serial.print("Output: ");
 		Serial.println(out);
 		Serial.println();
 		
-		//Prompt user again
-		Serial.println("Enter an integer value for % speed (-100 to 100):");
-		
 		Serial.print("\tTicks: ");
-		Serial.print(encoder.getTicks());
+		Serial.print(intake.getRackAndPinionEncoder().getTicks());
 	
 		Serial.print("\tValue: ");
-		Serial.print(encoder.getValue());
+		Serial.println(intake.getRackAndPinionEncoder().getValue());
+		
+		//Prompt user again
+		Serial.println("Enter an integer value for % speed (-100 to 100):");
 	}
 	
 	delay(20);
 }
-
-void interrupt(){
-	encoder.process();
-}
-
-

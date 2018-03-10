@@ -1,6 +1,5 @@
 #include <RobotLib.h>
 #include <IEEErobot2018.h>
-#define pin 5
 
 void setup() 
 {  

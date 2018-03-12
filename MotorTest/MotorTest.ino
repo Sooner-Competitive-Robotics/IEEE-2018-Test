@@ -8,7 +8,6 @@
 Motor motor;
 float out = 0.0;
 int userInput = 0;
-Encoder encoder(20,21);
 
 void setup()
 {
@@ -19,10 +18,6 @@ void setup()
 	
 	//Setup the motor
 	motor.begin(PIN_A, PIN_B, PIN_EN);
-	
-	encoder.setConstant(intakeEncoderConstant);
-
-	attachInterrupt(3,interrupt,CHANGE);
 	
 	//Prompt user
 	Serial.println("Enter an integer value for % speed (-100 to 100):");
@@ -53,19 +48,7 @@ void loop()
 		
 		//Prompt user again
 		Serial.println("Enter an integer value for % speed (-100 to 100):");
-		
-		Serial.print("\tTicks: ");
-		Serial.print(encoder.getTicks());
-	
-		Serial.print("\tValue: ");
-		Serial.print(encoder.getValue());
 	}
 	
 	delay(20);
 }
-
-void interrupt(){
-	encoder.process();
-}
-
-

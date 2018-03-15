@@ -3,7 +3,6 @@
 #define IR_PIN3 A2
 #define IR_PIN4 A3
 #define IR_PIN5 A4
-#define IR_PIN6 A5
 
 void printIR(int pin)
 {
@@ -26,8 +25,6 @@ void loop()
 	printIR(IR_PIN4);
 	Serial.print("\t");
 	printIR(IR_PIN5);
-	Serial.print("\t");
-	printIR(IR_PIN6);
 	
 	Serial.println();
 	delay(100);

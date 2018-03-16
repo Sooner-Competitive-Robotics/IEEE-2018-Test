@@ -3,6 +3,7 @@
 
 int pickUpState;
 Color c("cyan");
+bool aBool = true;
 
 void setup()
 {
@@ -11,17 +12,26 @@ void setup()
 
 void loop()
 {
+	if (aBool)
+	{
+		//intake.resetRack();
+		aBool = false;
+	}
+	
 	pickUpState = intake.pickUpSequence(c);
 	
-	Serial.print(pickUpState);
+	Serial.print ("This State: ");
+	Serial.print(intake.getStateString());
 	Serial.print("\t");
-	Serial.println(tEncoder.getValue());
-	Serial.print("\n");
+	Serial.print ("This Value: ");
+	Serial.print(intake.getRackAndPinionEncoder().getValue());
+	Serial.println("\n");
 	
 	if(pickUpState == 2)
 	{
+		aBool = true;
 		Serial.println("Done!");
-		delay(2000);
+		delay(5000);
 	}
 	else
 	{

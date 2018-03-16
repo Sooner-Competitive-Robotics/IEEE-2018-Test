@@ -2,6 +2,7 @@
 #include <IEEErobot2018.h>
 
 int pickUpState;
+bool colorScanned = false;
 Color c("cyan");
 
 void setup()
@@ -11,7 +12,9 @@ void setup()
 
 void loop()
 {
-	pickUpState = intake.pickUpSequence(c);
+	//updateColorSensor();
+	
+	pickUpState = intake.pickUpSequence(currentColor, colorScanned);
 	
 	Serial.print ("This State: ");
 	Serial.print(intake.getStateString());
@@ -23,12 +26,17 @@ void loop()
 	Serial.print(intake.getRackAndPinionEncoder().getValue());
 	Serial.print("\t");
 	
-	Serial.println(testColor.getColorName());
+	Serial.println(currentColor.getColorName());
 	
 	if(pickUpState == 2)
 	{
 		Serial.println("Done!");
+		colorScanned = false;
 		delay(5000);
+	}
+	else if (pickUpState == 1)
+	{
+		colorScanned = true;
 	}
 	else
 	{

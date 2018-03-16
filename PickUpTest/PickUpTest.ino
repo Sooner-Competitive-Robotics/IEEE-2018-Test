@@ -12,7 +12,7 @@ void setup()
 
 void loop()
 {
-	//updateColorSensor();
+	updateColorSensor();
 	
 	pickUpState = intake.pickUpSequence(currentColor, colorScanned);
 	
@@ -32,7 +32,7 @@ void loop()
 	{
 		Serial.println("Done!");
 		colorScanned = false;
-		delay(5000);
+		delay(2500);
 	}
 	else if (pickUpState == 1)
 	{

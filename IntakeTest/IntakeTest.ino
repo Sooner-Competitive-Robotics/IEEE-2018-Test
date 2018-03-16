@@ -12,13 +12,29 @@ void loop()
 	
 	updateColorSensor();
 	
-	delay(100);
+	pickUpState = intake.pickUpSequence(currentColor);
 	
-	intake.pickUpSequenceA(currentColor);
+	Serial.print ("This State: ");
+	Serial.print(intake.getStateString());
+	Serial.print("\t");
+	Serial.print ("This Ticks: ");
+	Serial.print(intake.getRackAndPinionEncoder().getTicks());
+	Serial.print("\t");
+	Serial.print ("This Value: ");
+	Serial.print(intake.getRackAndPinionEncoder().getValue());
+	Serial.println("\n");
 	
-	delay(100);
+	if(pickUpState == 2)
+	{
+		Serial.println("Done!");
+		delay(5000);
+	}
+	else
+	{
+		delay(50);
+	}
 	
-	intake.dropOffSequence(currentColor);
+	//intake.dropOffSequence(currentColor);
 	
 	delay(1000);
 	

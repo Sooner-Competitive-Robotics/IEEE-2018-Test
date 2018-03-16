@@ -23,6 +23,9 @@ void loop()
 	Serial.print ("This State: ");
 	Serial.print(intake.getStateString());
 	Serial.print("\t");
+	Serial.print ("This Ticks: ");
+	Serial.print(intake.getRackAndPinionEncoder().getTicks());
+	Serial.print("\t");
 	Serial.print ("This Value: ");
 	Serial.print(intake.getRackAndPinionEncoder().getValue());
 	Serial.println("\n");

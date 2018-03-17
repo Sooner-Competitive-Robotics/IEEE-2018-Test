@@ -9,5 +9,5 @@ void setup()
 void loop() 
 {
 	//Serial.println("Following Line");
-	drivetrain.followLine();
+	drivetrain.followLine(lineFollower.getDensity(), lineFollower.getPosition());
 }

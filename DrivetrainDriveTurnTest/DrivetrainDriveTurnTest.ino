@@ -24,7 +24,7 @@ void loop()
 		Serial.print("Drive Command ID: ");
 		Serial.print(index);
 		
-		//updateGyro();
+		updateGyro();
 		
 		Serial.print(" \tYaw: ");
 		Serial.print(yaw);

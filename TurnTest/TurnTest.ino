@@ -47,7 +47,7 @@ void loop()
 		//Turn to angle straight
 		turnComplete = drivetrain.drive(0, angleInput, yaw, resetDrive);
 		resetDrive= false;
-		
+				
 		Serial.print("\tStatus: ");
 		Serial.print(turnComplete);
 		

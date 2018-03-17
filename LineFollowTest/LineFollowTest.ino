@@ -8,6 +8,7 @@ void setup()
 
 void loop() 
 {
+	Serial.println(lineFollower.getRaw());
 	//Serial.println("Following Line");
 	drivetrain.followLine(lineFollower.getDensity(), lineFollower.getPosition());
 }

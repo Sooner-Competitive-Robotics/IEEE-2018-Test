@@ -3,7 +3,7 @@
 
 int pickUpState;
 bool colorScanned = false;
-Color c("cyan");
+Color c("gray");
 
 void setup()
 {
@@ -14,7 +14,7 @@ void loop()
 {
 	updateColorSensor();
 	
-	pickUpState = intake.pickUpSequence(currentColor, colorScanned);
+	pickUpState = intake.pickUpSequence(c, colorScanned);
 	
 	Serial.print ("This State: ");
 	Serial.print(intake.getStateString());

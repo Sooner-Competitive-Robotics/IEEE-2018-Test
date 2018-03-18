@@ -14,8 +14,8 @@ void loop()
 {
 	updateColorSensor();
 	
-	pickUpState = intake.pickUpSequence(c, colorScanned);
-	
+	pickUpState = intake.pickUpSequence(currentColor, colorScanned);
+/*	
 	Serial.print ("This State: ");
 	Serial.print(intake.getStateString());
 	Serial.print("\t");
@@ -25,7 +25,14 @@ void loop()
 	Serial.print ("This Value: ");
 	Serial.print(intake.getRackAndPinionEncoder().getValue());
 	Serial.print("\t");
-	
+*/	
+	Serial.print("R: ");
+	Serial.print(currentColor.getRed());
+	Serial.print("\tG: ");
+	Serial.print(currentColor.getGreen());
+	Serial.print("\tB: ");
+	Serial.print(currentColor.getBlue());
+	Serial.print("\t");
 	Serial.println(currentColor.getColorName());
 	
 	if(pickUpState == 2)

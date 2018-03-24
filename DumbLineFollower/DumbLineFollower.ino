@@ -31,6 +31,10 @@ void loop() {
       delay(100);
       drivetrain.drive(6, 0, yaw, initDrive);
     }
+    else
+    {
+      drivetrain.drive(6, 0, yaw, initDrive);
+    }
   }
   else if(density > 0 && density < 3)
   {

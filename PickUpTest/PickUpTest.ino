@@ -2,7 +2,7 @@
 #include <IEEErobot2018.h>
 
 int pickUpState;
-bool colorScanned = false;
+//bool colorScanned = false;
 Color c("gray");
 
 void setup()

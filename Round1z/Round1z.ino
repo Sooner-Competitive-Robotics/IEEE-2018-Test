@@ -5,11 +5,14 @@
 bool driveComplete = false;
 bool resetDrive = true;
 
-float distances[10] = {12, 0, 24, 0, 12, 0, 24, 0, 24, 0};
-float angles[10] = {0, -90, -90, 0, 0, 90, 90, 180, 180, 0};
-int index = 0;
+//float distances[10] = {12, 0, 24, 0, 12, 0, 24, 0, 24, 0};
+//float angles[10] = {0, -90, -90, 0, 0, 90, 90, 180, 180, 0};
+//int index = 0;
 
 int coinCount = 0;
+int doneThis = 0;
+
+bool pickUpDoThis = true;
 
 //Debug vars
 float left, right, dist;
@@ -19,35 +22,38 @@ void setup()
 	robotSetup();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  drivetrain.drive(17, 0, yaw, resetDrive);                       //18" from middle of white square to edge of 4x4' square
-  drivetrain.searchForward(yaw);
+void loop() 
+{
+	// put your main code here, to run repeatedly:
+	drivetrain.drive(17, 0, yaw, resetDrive);                       //18" from middle of white square to edge of 4x4' square
+	drivetrain.searchForward(lineFollower.getDensity(), yaw);
 
-  drivetrain.drive(0, 90, yaw, resetDrive);
-  drivetrain.followLineUntilCoin();                         
-  if(intake.coinDetected())
-  {
-    drivetrain.drive(distMetalDetectToIntake, 0, yaw, resetDrive);
-    updateColorSensor();
-    intake.pickUpSequence(currentColor);
-    coinCount++;
-  }
+	drivetrain.drive(0, 90, yaw, resetDrive);
+	drivetrain.followLineUntilCoin(lineFollower.getDensity(), lineFollower.getPosition(), yaw);
   
-  drivetrain.drive(distIntakeToMatrix, 0, yaw, resetDrive);					//on bottom right 4x4' sq
-  drivetrain.drive(0, -135, yaw, resetDrive);								//turn onto diagonal (from top left to bottom right)
+	/*//drive from metal detector to magnet
+	drivetrain.drive(distMetalDetectToIntake, 0, yaw, resetDrive);
+	
+	intake.pickUpSequence(currentColor);
+	coinCount++;
   
-  while(coinCount != 2)										//follow diagonal and pick up coins
-  {
-    drivetrain.followLineUntilCoin();
-    if(intake.coinDetected())
+	drivetrain.drive(distIntakeToMatrix, 0, yaw, resetDrive);					//on bottom right 4x4' sq
+	drivetrain.drive(0, -135, yaw, resetDrive);*/								//turn onto diagonal (from top left to bottom right)
+	pickUpTurnDrive(-135);
+	coinCount++;
+	
+	/*
+	while(coinCount != 2)										//follow diagonal and pick up coins
+	{
+		drivetrain.followLineUntilCoin();
+		if(intake.coinDetected())
     {
-      drivetrain.drive(distMetalDetectToIntake, 0, yaw, resetDrive);
-      updateColorSensor();
-      intake.pickUpSequence(currentColor);
-      coinCount++;
+		drivetrain.drive(distMetalDetectToIntake, 0, yaw, resetDrive);
+		updateColorSensor();
+		intake.pickUpSequence(currentColor);
+		coinCount++;
     }  
-  }															//end bot right corner 2x2'
+}															//end bot right corner 2x2'
   
   drivetrain.drive(25.5, 0, yaw, resetDrive);          //drive over gray square
   drivetrain.followLineUntilCoin();
@@ -176,5 +182,6 @@ void loop() {
   
   drivetrain.drive(0, -90, yaw, resetDrive);
   drivetrain.drive(42, 0, yaw, resetDrive);                                               //3.5' is distance between centers of color squares, RETURN to WHITE SQUARE
-  
+  */
 }
+

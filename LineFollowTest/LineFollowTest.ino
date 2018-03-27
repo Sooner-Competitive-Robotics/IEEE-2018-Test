@@ -19,9 +19,14 @@ void setup()
 
 void loop() 
 {
-	Serial.println(lineFollower.getRaw());
-	//Serial.println("Following Line");
-	drivetrain.followLine(lineFollower.getDensity(), lineFollower.getPosition());
+	//Serial.println(lineFollower.getRaw());
+	Serial.print("Density: ");
+	Serial.print(lineFollower.getDensity());
+	Serial.print("\t");
+	Serial.print("Position: ");
+	Serial.println(lineFollower.getPosition());
+	//drivetrain.followLine(lineFollower.getDensity(), lineFollower.getPosition(), yaw);
+ 
  
   /*uint8_t nextState = state;
   switch (state) {

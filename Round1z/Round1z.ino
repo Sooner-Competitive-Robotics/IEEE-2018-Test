@@ -24,22 +24,46 @@ void setup()
 
 void loop() 
 {
-	// put your main code here, to run repeatedly:
-	drivetrain.drive(17, 0, yaw, resetDrive);                       //18" from middle of white square to edge of 4x4' square
-	drivetrain.searchForward(lineFollower.getDensity(), yaw);
-
-	drivetrain.drive(0, 90, yaw, resetDrive);
-	drivetrain.followLineUntilCoin(lineFollower.getDensity(), lineFollower.getPosition(), yaw);
-  
-	/*//drive from metal detector to magnet
-	drivetrain.drive(distMetalDetectToIntake, 0, yaw, resetDrive);
+	Serial.print("Stage 1");
+	while (!driveComplete)                   				//18" from middle of white square to edge of 4x4' square
+	{
+		updateGyro();
+		driveComplete = drivetrain.drive(15, 0, yaw, resetDrive);
+		resetDrive = false;
+	}
+	resetDrive = true;
+	driveComplete = false;
+		
+	Serial.print("Stage 2");
+	while (lineFollower.getDensity() < 3)
+	{
+		Serial.println(lineFollower.getDensity());
+		updateGyro();
+		drivetrain.driveIndefinitely(.3, 0, yaw, resetDrive);
+		resetDrive = false;
+	}
+	drivetrain.drive(0,0,yaw,true);
+	resetDrive = true;
 	
-	intake.pickUpSequence(currentColor);
-	coinCount++;
+	Serial.print("Stage 3");
+	while (!driveComplete)                   				//18" from middle of white square to edge of 4x4' square
+	{
+		updateGyro();
+		Serial.println(yaw);
+		driveComplete = drivetrain.drive(0, 90, yaw, resetDrive);
+		resetDrive = false;
+	}
+	resetDrive = true;
+	driveComplete = false;
+	
+	Serial.print("Stage 4");
+	while(!drivetrain.followLineUntilCoin(lineFollower.getDensity(), lineFollower.getPosition(), yaw))
+	{
+		updateGyro();
+	}
   
-	drivetrain.drive(distIntakeToMatrix, 0, yaw, resetDrive);					//on bottom right 4x4' sq
-	drivetrain.drive(0, -135, yaw, resetDrive);*/								//turn onto diagonal (from top left to bottom right)
-	pickUpTurnDrive(-135);
+	Serial.println("Stage 5");
+	pickUpTurnDrive(-135); //Now aiming UP & LEFT across diagonal
 	coinCount++;
 	
 	/*

@@ -12,7 +12,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   Serial.print("\tpos: ");
-  Serial.println(lineFollower.getPosition());
+  Serial.print(lineFollower.getPosition());
   Serial.print("\tden: ");
   Serial.println(lineFollower.getDensity());
   int density = lineFollower.getDensity();
@@ -23,17 +23,17 @@ void loop() {
     {
       drivetrain.drive(0, -25, yaw, initDrive);
       delay(100);
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
     }
     else if(step = "LEFT")
     {
       drivetrain.drive(0, 25, yaw, initDrive);
       delay(100);
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
     }
     else
     {
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
     }
   }
   else if(density > 0 && density < 3)
@@ -42,19 +42,20 @@ void loop() {
     {
       drivetrain.drive(0, -25, yaw, initDrive);
       delay(100);
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
       step = "LEFT";
     }
     else if(position < -50)
     {
       drivetrain.drive(0, 25, yaw, initDrive);
       delay(100);
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
       step = "RIGHT";
     }
     else
     {
-      drivetrain.drive(6, 0, yaw, initDrive);
+      drivetrain.drive(8, 0, yaw, initDrive);
+      step = "";
     }
   }
   /*else

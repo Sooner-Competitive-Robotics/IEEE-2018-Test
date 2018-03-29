@@ -33,6 +33,6 @@ void loop() {
     delay(50); //more delay
     
     //There needs to be a delay because the computer can't
-      print a statement instantaneously after another statement
+      //print a statement instantaneously after another statement
     }
 }

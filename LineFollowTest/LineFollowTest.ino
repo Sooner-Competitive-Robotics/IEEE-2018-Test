@@ -40,7 +40,7 @@ void loop()
 	Serial.print("Right: ");	
 	Serial.println(drivetrain.getRightOutput());
 	
-	//drivetrain.pathFollower(lineFollower.getDensity(), lineFollower.getRaw())
+	//drivetrain.pathFollower(lineFollower.getDensity(), lineFollower.getRaw());
  
   /*uint8_t nextState = state;
   switch (state) {

@@ -1,14 +1,14 @@
-#define PIN 19
+#define PIN 20
 
 void setup()
 {
 	Serial.begin(9600);
 	
-	pinMode(PIN, INPUT);
-	digitalWrite(PIN, HIGH);
+	pinMode(21, INPUT);
+	//digitalWrite(PIN, HIGH);
 }
 
 void loop()
 {
-	Serial.println(digitalRead(PIN));
+	Serial.println(digitalRead(21));
 }

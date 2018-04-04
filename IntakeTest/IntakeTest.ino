@@ -10,20 +10,26 @@ void loop()
 {
 	// DO NOT RUN UNTIL INTAKE_CONSTATNS HAVE BEEN TESTED FOR AND ADDED TO INTAKECONSTANTS.H !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
-	updateColorSensor();
+	while (!intake.getLowSwitch())
+	{
+		Serial.println("Reseting");
+		iMotor.output(-.4);
+	}
+	
+	//updateColorSensor();
 		
-		if(intake.getIntakeReturn() != 2)
-		{
-			Serial.println(intake.getStateString());
-			intake.pickUpSequence(currentColor, colorScanned);
-		}
+	while (!intake.coinDetected())
+	{
+		Serial.print(intake.getStateString());
+		Serial.print("LOOKING FOR COIN\n");	
+	}
 		
-		if(intake.getIntakeReturn() == 2)
-		{
-			colorScanned = false;
-			//finishedPickingUp = true;
-		}
-		else if(intake.getIntakeReturn() == 1)
+	while (intake.getIntakeReturn() != 2)
+	{
+		Serial.println(intake.getStateString());
+		intake.pickUpSequence(currentColor, colorScanned);
+				
+		if(intake.getIntakeReturn() == 1)
 		{
 			colorScanned = true;
 		}
@@ -31,7 +37,9 @@ void loop()
 		{
 			delay(50);
 		}
+	}
 	
+	colorScanned = false;
 	//intake.dropOffSequence(currentColor);
 	
 	delay(1000);
